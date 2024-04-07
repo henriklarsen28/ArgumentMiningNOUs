@@ -1,3 +1,5 @@
+Dato: 21.02.2024
+
 Høringssvar fra Helsedirektoratet - NOU 2023:25 Omstilling til lavutstlipp Veivalg for 
 klimapolitikken mot 2050 
  
@@ -7,46 +9,32 @@ om at Helsedirektoratet, dersom direktoratet ønsker å gi innspill, gjøre dett
 Høringsfrist er 30. januar 2024. Helsedirektoratet sender over og legger innspillet inn på regjeringen.no. 
  
 Generelt oppfatter vi at rapporten er oversiktlig og ryddig, har et tydelig budskap og peker på klare 
-veivalg fram mot 2050. Vi støtter hovedinnholdet og har noen innspill.  
+veivalg fram mot 2050. Vi støtter hovedinnholdet og har noen innspill. 
 Sammenhengen mellom klima og helse er vel kjent og får stadig mer oppmerksomhet. Ikke minst 
 internasjonalt har Verdens helseorganisasjon (WHO) sitt initiativ One Health fått økende 
 gjennomslagskraft. One Health er en bred og integrert tilnærming til bærekraft og helse, og innlemmer 
 både folkehelse, og tilstanden til dyr, planter og ulike økosystemer. I Norge knyttes denne tilnærmingen 
 særlig til arbeidet med matsikkerhet og bekjempelse av nye helsetrusler som matbårne sykdommer, 
-zoonoser og antibiotikaresistens1. I løpet av våren 2024 skal Folkehelseinstituttet levere en 
+zoonoser og antibiotikaresistens. I løpet av våren 2024 skal Folkehelseinstituttet levere en 
 kunnskapsoppsummering om klimaendringenes betydning for sykdomsbilde i Norge. 
- 
+
 WHO har estimert at klimaavtrykket av helsetjenester står for omkring 4,4 % av det totale 
-karbonutslippet globalt2. Helsesektoren i Norge sitt bidrag til Norges totale klimagassutslipp ble første 
+karbonutslippet globalt. Helsesektoren i Norge sitt bidrag til Norges totale klimagassutslipp ble første 
 gang forsøkt kartlagt i 2023. Etter at Norge forpliktet seg til COP26 Helseprogram i 2021, fikk sektoren et 
-tydelig mandat til å kartlegge egne utslipp og foreslå tiltak for å redusere disse. I en rapport3 om 
+tydelig mandat til å kartlegge egne utslipp og foreslå tiltak for å redusere disse. I en rapport om 
 klimagassutslipp fra helse- og omsorgssektoren som Helsedirektoratet publiserte i mai 2023, gjøres et 
 grovt utslippsestimat på om lag 2,6 tonn CO2-ekvivalenter årlig fordelt på spesialisthelsetjenesten og 
 den kommunale helse- og omsorgstjenesten. Størstedelen av helsetjenestens utslipp er knyttet til kjøp 
 av varer og tjenester og kapitalinvesteringer i bygg (indirekte utslipp). Utslipp knyttet til forbruk av 
 medisinske forbruksvarer og medikamenter er særlig framtredende. Det er besluttet at offentlige 
 sykehus i Norge skal kutte bruken av astmainhalatorer med klimagasser fra 2025. 
-I tillegg til forpliktelsene knyttet til COP 26, har Norge også signert Budapest erklæringen4 som ble 
+I tillegg til forpliktelsene knyttet til COP 26, har Norge også signert Budapest erklæringen som ble 
 vedtatt under den syvende ministerkonferansen om miljø og helse juli 2023. Denne erklæringen 
- 
-1 Én-helse (One Health) - FHI  
-2 HealthCaresClimateFootprint , 2014 
-3 Klimagassutslipp fra helse- og omsorgssektoren - Helsedirektoratet  
-4 Declaration of the Seventh Ministerial Conference on Environment and Health: Budapest, Hungary 5–7 July 2023 
-(who.int)  Klima- og miljødepartementet  
-Postboks 8013 Dep 
-0030 OSLO Deres ref. : 23/4169 
-Vår ref. : 23/49086-6 
-Saksbehandler : Heidi Fadum 
-Dato : 21.02.2024 
-  
-    - 2 - 
- adresserer trippel-krisen hvor klimaendringer, forurensning og tap av biologisk mangfold representerer 
+adresserer trippel-krisen hvor klimaendringer, forurensning og tap av biologisk mangfold representerer 
 alvorlige trusler mot liv og helse. Videre er klimaendringenes hendelser og konsekvenser løftet 
 tydeligere inn som en integrert del av helseberedskapen av Totalberedskapsutvalget. 
  
 Innspill 
- 
 Klimautvalget 2050 har levert et omfattende, ambisiøst og kunnskapsbasert grunnlag for veivalg i 
 klimapolitikken. Klimapolitikken er tenkt å gripe tungt inn i øvrige politikkområder, også helse. 
 Helsedirektoratet har startet arbeidet med å bygge et faglig grunnlag for politikkutvikling på området 
@@ -62,7 +50,7 @@ Dette er eksempler på tiltak som også kan bidra til redusert behov for transpo
 Gjennom systematisk folkehelsearbeid og forebygging kan man redusere bruk av helsetjenester og 
 dermed tjenestenes totale klimafotavtrykk. Helsedirektoratet jobber for et sunnere kosthold og mer 
 bruk av aktiv transport og lykkes vi med dette vil vi ikke bare få en friskere befolkning, men også et 
-lavere forbruk av tjenester og utstyr – og dermed mindre utslipp av klimagasser.  
+lavere forbruk av tjenester og utstyr – og dermed mindre utslipp av klimagasser. 
 Helse- og omsorgsdepartementet vil våren 2024 legge fram et veikart mot en bærekraftig lavutslipps 
 helse og omsorgstjeneste innen 2050. Veikartet vil bestå av en rekke tiltak tjenestene kan iverksette for 
 å redusere sitt klimafotavtrykk. Flere av tiltakene kan bare gjennomføres i nært samarbeid med andre 
@@ -73,80 +61,54 @@ Klimautvalget 2050 peker på at kompleksiteten i omstillingen som kreves kan for
 mange måter, for eksempel kan psykologiske perspektiver være nyttige. På tross av stadig mer kunnskap 
 om klimaendringene og behovet for handling, er det fortsetter en del klimaskepsis og vegring mot 
 atferdsendring. En nøkkelutfordring som kan forklare denne motstanden kan være det psykologiske 
-fenomenet kjent som "psykologisk avstand"5. "Psykologisk avstand" refererer til den mentale distansen 
+fenomenet kjent som "psykologisk avstand". "Psykologisk avstand" refererer til den mentale distansen 
 mellom mennesker og klimaendringenes realiteter, der de oppfattes som fjerntliggende og abstrakte 
 heller enn som nære og umiddelbare problemer (Ibid.). Det bør vurderes om det kan være behov for i 
 større grad å gjennomføre holdningsskapende tiltak, herunder økt informasjon om klima og 
 klimakonsekvenser. 
  
-Del B En bred omstilling  
- 
-• Kap. 4 – rettferdighet i omstillingen 
+Del B En bred omstilling 
+- Kap. 4 – rettferdighet i omstillingen 
  
 Rettferdighet bør bli et styrket perspektiv i klimaarbeidet fremover 
 Det er positivt at rettferdighet i omstillingen trekkes frem i Klimautvalgets rapport, og at utvalget 
 anbefaler at fordelingseffekter av klimatak skal vurderes mer systematisk i politiske prosesser og i valg 
 av virkemidler. Dette støttes av Helsedirektoratet. 
- 
- 
-5 Keller., E, et al (2022). A systematic review of the psychological distance of climate change: Towards the 
-development of an evidence-based construct. Journal of Environmental psychology, Volume 81, June 2022. 
-https://doi.org/10.1016/j.jenvp.2022.101822  - 3 - 
- Rettferdighet er også sentralt når det gjelder helse, og hvordan helsen er fordelt i befolkningen. Det er 
-et mål for norsk folkehelsepolitikk at sosiale helseforskjeller skal reduseres6, og etter folkehelseloven fra 
-20117 er både statlige, regionale og lokale myndigheter forpliktet til å bidra til en samfunnsutvikling som 
-søker å utjevne sosiale helseforskjeller.  
+
+Rettferdighet er også sentralt når det gjelder helse, og hvordan helsen er fordelt i befolkningen. Det er 
+et mål for norsk folkehelsepolitikk at sosiale helseforskjeller skal reduseres, og etter folkehelseloven fra 
+2011 er både statlige, regionale og lokale myndigheter forpliktet til å bidra til en samfunnsutvikling som 
+søker å utjevne sosiale helseforskjeller.
+
 At klimaendringene påvirker helse direkte og indirekte er grundig diskutert, blant annet i bidrag til IPCCs 
-femte evalueringsrapport8 som deler slike effekter i tre: direkte effekter (som ekstremvær), indirekte 
+femte evalueringsrapport som deler slike effekter i tre: direkte effekter (som ekstremvær), indirekte 
 effekter som er formidlet gjennom naturlige systemer (som vektorbårne sykdommer og luftforurensing) 
 eller gjennom menneskeskapte systemer (som endring i ernæring, økt konflikt og psykisk uhelse). 
 Rapporten argumenterer også for at klimaendringenes negative helsekonsekvenser ikke er jevnt og 
-rettferdig fordelt verken internasjonalt, nasjonalt eller lokalt.  
+rettferdig fordelt verken internasjonalt, nasjonalt eller lokalt.
+
 Sosiale helseforskjeller kan oppstå gjennom flere mekanismer. Det kan skje gjennom at personer med 
 ulik sosial status eller gruppetilhørighet (1) sosialt stratifiseres til (urettferdige) sosiale posisjoner som 
 bestemmer mulighetene for helse, (2) blir ulikt eksponert for helsedeterminanter, (3) har ulik sårbarhet 
 for de negative effektene av determinanter, og/eller (4) opplever ulike sosiale og økonomiske 
-konsekvenser av uhelse og sykdom9. Sosiale helseforskjeller i Norge er betydelige og etter noen 
-indikatorer også økende10. Blant annet økte gapet i forventet levealder etter inntekt mellom 2005 og 
-2015 for både menn og kvinner i Norge:  11 
+konsekvenser av uhelse og sykdom. Sosiale helseforskjeller i Norge er betydelige og etter noen 
+indikatorer også økende. Blant annet økte gapet i forventet levealder etter inntekt mellom 2005 og 
+2015 for både menn og kvinner i Norge:
  
 Det er vanskelig å fastsette nøyaktige årsaker til sosiale helseforskjeller, og hvor mye av det er knyttet til 
 for eksempel miljø, på grunn av komplekse og samtidige effektene av helsedeterminanter på helse. 
 Verdens helseorganisasjon (WHO) har estimert at forskjeller i levekår utgjør nesten 30% av gapet i 
 selvrapportert helse i EU og at 20% av det igjen kan tilskrives manglende grøntområder, utrygge 
 nabolagsforhold og luftforurensning. Dette viser viktigheten av miljøfaktorers påvirkning på helse og 
-fordelingen av helse i befolkningen12. Også i Norge viser forskning betydelige sosiale forskjeller i bo- og 
-nærmiljø i byer og dermed ulikhet i utsatthet for helsedeterminanter13.   
+fordelingen av helse i befolkningen. Også i Norge viser forskning betydelige sosiale forskjeller i bo- og 
+nærmiljø i byer og dermed ulikhet i utsatthet for helsedeterminanter. 
  
 En gjennomgang av norsk politikk om sosial ulikhet i helse fra et internasjonalt fagmiljø argumenterer 
 for at miljømessig bærekraft og utjevning av helseforskjeller er uløselig knyttet sammen, og at de begge 
-er sentrale for å skape et rettferdig og bærekraftig samfunn både nå og i fremtiden.14 Å jobbe med 
- 
-6 Meld. St. 15 (2022-2023): Folkehelsemeldinga – Nasjonal strategi for utjamning av sosiale helseforskjellar 
-7 Lov om folkehelsearbeid (2011).  
-8 Smith m. fl. (2014) Human health: impacts, adaptation, and co-benefits. In: Climate Change 2014: Impacts, 
-Adaptation, and Vulnerability. Part A: Global and Sectoral Aspects. Contribution of Working Group II to the 
-Fifth Assessment Report of the Intergovernmental Panel on Climate Change [Field, C.B., V.R. Barros, 
-D.J. Dokken, K.J. Mach, M.D. Mastrandrea, T.E. Bilir, M. Chatterjee, K.L. Ebi, Y.O. Estrada, R.C. Genova, 
-B. Girma, E.S. Kissel,A.N. Levy, S. MacCracken, P.R. Mastrandrea, and L.L.White (eds.)]. Cambridge University 
-Press, Cambridge, United Kingdom and New York, NY, USA, pp. 709-754. 
-https://www.ipcc.ch/report/ar5/wg2/human-health-impacts-adaptation-and-co-benefits/ 
-9 Diderichsen F, Evans T og Whitehead M (2001) 'The Social Basis of Disparities in Health', i Evans, T, Whitehead, M, 
-Diderichsen, F, Bhuiya, A and Wirth, M (red.) Challenging Inequities in Health: From Ethics to Action, Oxford 
-University Press, New York. 
-10 Goldblatt m.fl. (2023): Rapid review of inequalities in health and wellbeing in Norway since 2014. London: 
-Insitute of health equity, ss. 18-28. 
-11 Kinge JM, Modalsli JH, Overland S, Gjessing HK, Tollanes MC, Knudsen AK, Skirbekk V, Strand BH, Haberg SE og 
-Vollset SE (2019) 'Association of Household Income With Life Expectancy and Cause-Specific Mortality in Norway, 
-2005-2015', JAMA, 321(19): 1916-1925. doi:10.1001/jama.2019.4329. 
-12 WHO (2019) Environmental health inequalities in Europe: Second assessment report, 
-https://www.who.int/europe/publications/i/item/9789289054157 , side 4  
-13 NOU 2020: 16 - regjeringen.no  
-14 Goldblatt m.fl. (2023): Rapid review of inequalities in health and wellbeing in Norway since 2014. London:Insitute 
-of health equity - 4 - 
- miljømessig bærekraft og utjevning av helseforskjeller beskrives derfor som en "vinn-vinn"-situasjon i 
+er sentrale for å skape et rettferdig og bærekraftig samfunn både nå og i fremtiden. Å jobbe med 
+miljømessig bærekraft og utjevning av helseforskjeller beskrives derfor som en "vinn-vinn"-situasjon i 
 rapporten om ulikhet i helse i Norge; innsats for miljømessig bærekraft kan skape positive synergier når 
-det kommer til utjevning av sosiale helseforskjeller, og motsatt.  
+det kommer til utjevning av sosiale helseforskjeller, og motsatt. 
  
 Utvalget anbefaler at tiltak for rettferdig fordeling og for å begrense økonomisk ulikhet i hovedsak 
 ivaretas av andre politikkområder. Samtidig skriver utvalget at klimapolitikken vil gripe inn i alle 
@@ -159,23 +121,23 @@ av klimatiltak, slik utvalget anbefaler. Ettersom sosial ulikhet i samfunnet gen
 helsen i befolkningen fordeler seg, bør fordeling av helsedeterminanter og direkte og indirekte 
 helsekonsekvenser av klimaendringer og klimatiltak vurderes som del av rettferdig omstilling. En 
 tverrsektoriell temaveileder til utredningsinstruksen om vurdering av helseeffekter i utredninger av 
-tiltak er under utvikling av Helsedirektoratet.  
+tiltak er under utvikling av Helsedirektoratet. 
  
-• Kap. 6 og 8 Areal- og transport 
+- Kap. 6 og 8 Areal- og transport 
 Areal- og transport som fremmer helse og utjevning, natur og klima 
 Klimautvalget 2050 understreker at vi må håndtere to store kriser samtidig: Klimaendringer og tap av 
 natur (s. 116). Tap av natur ødelegger økosystemer som mennesker er avhengig av og bruk av arealer 
 øker utslipp og legger føringer for framtidige utslipp. Helsedirektoratet støtter utvalgets vurderinger om 
 å redusere transportbehov, kompakt by- og tettstedsutvikling, tilrettelegging for kollektiv, sykling og 
 gåing og annen grønn mobilitet. Ivaretagelse av natur og grøntområder er også sentralt i fortetting – 
-både med tanke på folkehelse og friluftsliv, klima og overvannshåndtering.  
+både med tanke på folkehelse og friluftsliv, klima og overvannshåndtering. 
  
 Forskning viser samtidig at helseutjevning kan være "akilleshælen" når det kommer til positive synergier 
-mellom miljøtiltak og helse15. Fortetting er brukt som et eksempel i en rapport om kommunal 
+mellom miljøtiltak og helse. Fortetting er brukt som et eksempel i en rapport om kommunal 
 planlegging som redskap for å redusere sosiale helseforskjeller (Ibid.). Boliger i fortettede områder med 
 grønne kvaliteter og sentral beliggenhet er ofte kostbare, noe som begrenser hvem som har mulighet til 
 å bo der og dermed også dra nytte av miljøtiltakene. Slik kan miljøtiltak ha uheldige uintenderte 
-negative konsekvenser på helseulikheter.  
+negative konsekvenser på helseulikheter. 
  
 Styrking av samordningen mellom plan- og bygningsloven og andre lover, samt styrking av klimahensyn i 
 planloven, herunder i KU-forskriften, kan være nødvendig. Det er samtidig viktig at plan- og 
@@ -186,24 +148,20 @@ hensyn til ulike steder og behov i landet (s. 133).
  
 Del D Organisering for klimaomstilling 
  
-• Kap. 17 om et overordnet klimastyringssystem 
+- Kap. 17 om et overordnet klimastyringssystem 
  
 Systematisk arbeid for å fremme helse og klima 
 Klimautvalget 2050 peker på at målene i klimapolitikken må oppnås parallelt med en rekke andre 
 samfunnsmål (s. 30). WHO anbefaler for eksempel at helseaspekter må stå i sentrum for nasjonale 
- 
-15 Hofstad, H (2019). Kommunal planlegging som redskap for å redusere sosiale helseforskjeller - Oppsummering av 
-erfaringer fra tidligere forskning og workshop med nøkkelaktører. NIBR-rapport 2019:6. 
- - 5 - 
- planer for omstilling til lavutslipp16. WHO anser klimaendringene som vår tids største trussel mot 
+planer for omstilling til lavutslipp. WHO anser klimaendringene som vår tids største trussel mot 
 folkehelsen med alvorlige konsekvenser for befolkningens helse, helsesystemer og sosiale ulikheter i 
 helse. Ambisiøse nasjonale klimaforpliktelser har samtidig potensialet til å gi betydelige helsemessige 
-fordeler (Ibid.).  
+fordeler (Ibid.). 
  
 Ettersom tiltak som virker positivt for klima også ofte fremmer god helse, står også arbeidet med å 
 fremme klima overfor en del av de samme problemstillingene som arbeidet med å fremme helse og 
 jevne ut helseforskjeller: man er avhengig av innsats i stor grad utenfor egen sektor, bredt samarbeid og 
-oppslutning på tvers av aktører, arbeide forebyggende, og planlegge for langsiktig og strategisk innsats.  
+oppslutning på tvers av aktører, arbeide forebyggende, og planlegge for langsiktig og strategisk innsats. 
  
 Utvalget tar til orde for at det etableres et offentlig klimastyringssystem som bør inneholde følgende tre 
 hovedpilarer; planlegging, gjennomføring og evaluering. Systemet må være tett koblet på 
@@ -214,21 +172,15 @@ myndigheter har fått ansvar for å bidra til en helsefremmende samfunnsutviklin
 helseforskjeller. I Folkehelsemeldinga – Nasjonal strategi for utjamning av sosiale helseforskjellar 2022-
 2023 ble det publisert et oppdatert nasjonalt system for å følge opp folkehelsepolitikken. Helsesektoren 
 og klima- og miljøsektoren kan derfor ha mye å hente på å se målsettinger, utfordringer og virkemidler i 
-sammenheng.  
- 
- 
- 
+sammenheng. 
+
 I tillegg må man se på de ytre rammebetingelsene som lovverk, reguleringer og finansieringsmekanismer 
 slik at disse kan legge til rette for, og ikke være et hinder for omstilling. Og dermed sikre at denne 
 prosessen blir best mulig smidig og ikke rokker ved det overordnede samfunnsmålet med helsetjenesten 
 i Norge, om å sikre alle innbyggere tilstrekkelig og god tilgang til tjenester som er trygge og faglig 
 forsvarlige. 
- 
-16 WHO review of health in Nationally Determined Contributions and long-term strategies: health at the heart of 
-the Paris Agreement (2023) . Annen relevant informasjon er HEALTH in the nationally determined contributions 
-(WHO)  og "WHO guidance for healthy Nationally Determined Contributions and long-term strategies".  
-- 6 - 
- Utvalget mener at alle beslutninger som tas i dag må baseres på et mål om at så godt som alle 
+
+Utvalget mener at alle beslutninger som tas i dag må baseres på et mål om at så godt som alle 
 klimagassutslipp i Norge må være fjernet for godt innen 2050. Dette er en ambisiøs og radikal målsetting 
 som vil måtte lede til viktige diskusjoner om prioriteringer – som også må involvere helsesektoren. 
  
@@ -238,7 +190,7 @@ samordningsansvar. Et eksempel er Miljødirektoratets opprettelse av et rapporte
 sårbarhetsanalyser og klima- tilpasning. Ved opprettelse av denne type på-tvers-systemer er det også 
 viktig å tenke bredere enn det som utvalget definerer som sektorer, men også i større grad invitere med 
 "velferdssektorene" herunder helsemyndighetene. Sårbarheter og tilpasningsbehov relatert til 
-klimaendringer treffer sektoren vår særlig.  Et annet argument for bredere involvering er at selv om 
+klimaendringer treffer sektoren vår særlig. Et annet argument for bredere involvering er at selv om 
 utslippsreduksjonspotensiale ikke er like stort som i andre sektorer, vil det ha en pedagogisk betydning å 
 skape eierskap og engasjement til klimaarbeidet i alle deler av norsk forvaltning. Tverrgående arbeid vil 
 også bidra til nødvendig kunnskapsheving og kapasitetsbygging. 
@@ -246,46 +198,37 @@ også bidra til nødvendig kunnskapsheving og kapasitetsbygging.
 Hvordan et slikt system vil påvirke underliggende statsetater er ikke tydeliggjort, men vi oppfatter det 
 slik og er enig i at etatene selv må få sette sine egne klimamål og foreta egne strategiske veivalg for 
 sektorenes omstillingsprosesser. Dette mener vi er svært viktig og bør være hovedinnretningen i 
-arbeidet, supplert med evt. fellesføringer.  
+arbeidet, supplert med evt. fellesføringer. 
  
-Livskvalitetsøkonomi17  
+Livskvalitetsøkonomi
 (Wellbeing Economy) som eksempel på en styringsmodell som fremmer livskvalitet og klima. 
  
 Livskvalitet dreier seg om livet som helhet, og rommer verdier som frihet, trygghet, mening, livsglede, 
-deltakelse, engasjement og mestring18. Det er blitt utviklet et eget målesystem for livskvalitet, som blant 
+deltakelse, engasjement og mestring. Det er blitt utviklet et eget målesystem for livskvalitet, som blant 
 annet er brukt i årlige livskvalitetsundersøkelser siden 2020. SSB har gjennomført undersøkelsene på 
-oppdrag fra Helsedirektoratet. Undersøkelsene19 viser at det er tydelige sosiale forskjeller i livskvaliteten 
-i Norge.  
+oppdrag fra Helsedirektoratet. Undersøkelsene viser at det er tydelige sosiale forskjeller i livskvaliteten 
+i Norge. 
  
 Internasjonalt har stadig flere land og organisasjoner løftet livskvalitet til å være en kollektiv 
 samfunnsverdi, og et mål som myndigheter og andre aktører er pliktig til å styre etter, fremme og 
 tilrettelegge for på samfunnsnivå – og dette skal gjøres innenfor planetens tålegrenser. Denne 
 styringsmodellen omtales som en "livskvalitetsøkonomi", som prioriterer "human, social, planetary and 
-economic wellbeing, which constitute the well-being 'capitals'"20. Gjennom en slik tilnærming defineres 
+economic wellbeing, which constitute the well-being 'capitals'". Gjennom en slik tilnærming defineres 
 livskvalitet for nåværende og fremtidige generasjoner som det ønskede endemålet for 
 samfunnsutviklingen. Økonomisk vekst skal ikke lenger være et mål alene. I stedet anses økonomien 
 som det viktigste virkemiddelet for å nå målet om god og jevnt fordelt livskvalitet i befolkningen og en 
-samfunnsutvikling som respekterer og verdsetter klima og miljø.  
+samfunnsutvikling som respekterer og verdsetter klima og miljø. 
  
 Det sentrale i en livskvalitetsøkonomitilnærming er verdiene den er tuftet på. I følge Wellbeing Economy 
-Alliance21 er disse verdiene rettferdighet (fairness), deltakelse (participation), natur (nature), mening 
+Alliance er disse verdiene rettferdighet (fairness), deltakelse (participation), natur (nature), mening 
 (purpose) og verdighet (dignity). WHO har gjort et dypdykk i flere lands tilnærming til en Wellbeing 
 Economy, og finner noen elementer som går igjen: likhet og rettferdighet (equality and equity), holde 
- 
-17 "livskvalitetsøkonomi" (Hdirs uoffisielle oversettelse av "Wellbeing Economy") 
-18 Barstad m.fl. (2016): Gode liv i Norge. Utredning om måling av befolkningens livskvalitet. Oslo: Helsedirektoratet 
-(IS-2479) 
-19 Hvor fornøyde er vi med livet i Norge? – SSB  
-20 World Health Organization (2023): Deep dives on the well-being economy showcasing the experiences of Finland, 
-Iceland, Scotland and Wales: summary of key findings. World Health Organization. Regional Office for Europe 
-(https://apps.who.int/iris/handle/10665/366279 ) 
-21 What is a Wellbeing Economy : Wellbeing Economy Alliance (weall.org)  - 7 - 
- seg innenfor jordklodens tålegrenser, styrke lokalsamfunn, oppfylle behov til både nåværende og 
-fremtidige generasjoner, velstand (prosperity) og bærekraft6.  
+seg innenfor jordklodens tålegrenser, styrke lokalsamfunn, oppfylle behov til både nåværende og 
+fremtidige generasjoner, velstand (prosperity) og bærekraft. 
  
 Noe av årsaken bak den massive globale interessen og innsatsen for å sette livskvalitet i sentrum for 
 samfunnsutviklingen, stammer fra behovet for å imøtekomme de sammensatte og sammenkoblede 
-utfordringene og krisene verden står overfor i det 21. århundret2223. Begynnelsen på det 
+utfordringene og krisene verden står overfor i det 21. århundret. Begynnelsen på det 
 verdensomspennende arbeidet om livskvalitet som mål for samfunnsutviklingen kom nettopp som en 
 respons på en slik krise: finanskrisen i 2008. En livskvalitetsøkonomi søker å reparere økonomiske og 
 sosiale samfunnsstrukturer som gjør et samfunn sårbart mot kriser som for eksempel pandemier, sosial 
@@ -293,11 +236,11 @@ ulikhet og klimautfordringer og miljøforringelse. I møte med dette trenger pol
 beslutningstakere et verktøy som favner fenomener som har verdi for folks liv og dermed også for 
 samfunnet, og som ikke kun er knyttet til økonomisk vekst. FN peker på at "beyond GDP" kan være et 
 slikt verktøy. Et bredere fokus på faktorer utover de økonomiske kan fremme beslutningstaking som er 
-til det beste for mennesket, jordkloden, fred og partnerskap.  
+til det beste for mennesket, jordkloden, fred og partnerskap. 
  
 Stadig flere land formulerer ambisjoner om og tilnærminger til å innføre livskvalitet som et mål for 
-samfunnsutviklingen. OECD24 har vært blant viktige pådrivere internasjonalt. Skottland, New Zealand, 
-Wales, Island og Finland er med i partnerskapet Wellbeing Economy Governments25, der de har 
+samfunnsutviklingen. OECD har vært blant viktige pådrivere internasjonalt. Skottland, New Zealand, 
+Wales, Island og Finland er med i partnerskapet Wellbeing Economy Governments, der de har 
 forpliktet seg til å utforske en livskvalitetsøkonomi. Arbeide med livskvalitet og livskvalitetsøkonomi er 
 forankret sentralt i regjeringen, som ved statsministerens kontor eller i finansdepartementet, noe som 
 sikrer høy og tverrsektoriell forankring hos sentrale beslutningstakere. Dette gjør at verdiene i en 
@@ -307,9 +250,9 @@ som ligger til grunn for prioritering, lovgivning, integrering av livskvalitet i
 samfunnsøkonomiske analyser, og gi sektorene ansvar gjennom oppdrag og rapportering om livskvalitet. 
 Virkemidlene utformes på en slik måte at de fremmer tverrsektoriell innsats og samarbeid om ressurser 
 for å nå felles mål. De fremste eksemplene er fra New Zealand som i 2019 lanserte verdens første 
-"livskvalitetsbudsjett"26, et statsbudsjett med mål om å fremme livskvalitet i befolkningen. Wales har en 
-egen Wellbeing of Future Generations Act27, som har en egen ombudsfunksjon for å fremme 
-implementering av loven på tvers av alle samfunnssektorer.  
+"livskvalitetsbudsjett", et statsbudsjett med mål om å fremme livskvalitet i befolkningen. Wales har en 
+egen Wellbeing of Future Generations Act, som har en egen ombudsfunksjon for å fremme 
+implementering av loven på tvers av alle samfunnssektorer. 
  
 En "livskvalitetsøkonomi" er dermed ett av flere initiativer som har potensiale til å løfte inn både 
 menneskelige og miljømessige verdier og hensyn i sentral beslutningstaking i den nasjonale styringen, 
@@ -317,48 +260,11 @@ og forene samfunnssektorene om felles mål og verdier. En norsk gjennomgang av p
 utjevning av helseforskjeller28 anbefaler Norge å utvikle en livskvalitetsøkonomi-tilnærming. 
 Ambisjonene for livskvalitetsarbeidet i Norge vil forankres i regjeringens kommende nasjonale 
 livskvalitetsstrategi, som Helse- og omsorgsdepartementet leder utviklingen av og som vil lanseres i 
-202429. 
+2024. 
  
- 
- 
-22 United Nations System (2022): Valuing What Counts – United Nations System-wide Contribution on Progress 
-Beyond Gross Domestic Product (GDP). Chief Executive Board for Coordination, 17. august 2022 ( Valuing What 
-Counts - UN System-wide Contribution on Beyond GDP (advance unedited).pdf (unsceb.org) ) 
-23 Goldblatt m.fl. (2023): Rapid review of inequalities in health and wellbeing in Norway since 2014. London: 
-Insitute of health equity 
-24 Centre on Well-being, Inclusion, Sustainability and Equal Opportunity (WISE) - OECD  
-25 Wellbeing Economy Governments (WEGO) : Wellbeing Economy Alliance (weall.org)  
-26 New Zealand – Implementing the Wellbeing Budget : Wellbeing Economy Alliance (weall.org)  
-27 The Future Generations Commissioner for Wales – Acting today for a better tommorrow  
-28 Goldblatt m.fl. (2023): Rapid review of inequalities in health and wellbeing in Norway since 2014. London: 
-Insitute of health equity 
-29 Meld. St. 15 (2022-2023): Folkehelsemeldinga – Nasjonal strategi for utjamning av sosiale helseforskjellar - 8 - 
- Vi ser fram til videre oppfølging av arbeidet. 
- 
- 
+Vi ser fram til videre oppfølging av arbeidet. 
 Vennlig hilsen 
- 
-Linda Granlund  e.f. 
+Linda Granlund e.f. 
 direktør 
-Erlend Bø  
-seniorrådgiver  
- 
-Dokumentet er godkjent elektronisk  
- 
- 
-               
- 
-  
- 
- 
- 
- 
- 
-  - 9 - 
- Mottaker Kontaktperson Adresse Post 
- 
-HELSE- OG 
-OMSORGSDEPARTEMENTET            Postboks 8011 Dep 0030 OSLO 
-Klima- og 
-miljødepartementet            Postboks 8013 Dep 0030 OSLO 
- 
+Erlend Bø
+seniorrådgiver
