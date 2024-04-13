@@ -1,3 +1,4 @@
-
+dataset/html_hearings*.csv
+dataset/pdf*.csv
 dataset/pdf/*.pdf
 .vscode/settings.json
