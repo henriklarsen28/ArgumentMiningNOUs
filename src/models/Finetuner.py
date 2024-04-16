@@ -45,7 +45,7 @@ def compute_metrics(eval_pred):
 
 
 class FineTuner:
-    def __init__(self, model_name, csv_path, num_epochs=5, max_tokenized_length=128):
+    def __init__(self, model_name, csv_path, num_epochs=5, max_tokenized_length=512):
         # Load dataset using the new function
         dataset = load_dataset_from_csv(csv_path)
 
