@@ -39,15 +39,21 @@ def cleanup_whitespaces(text):
     return clean
 
 
-# Step 1: Import the text file into a string
-file_path = '../../dataset/txt/Avinor.txt'  # Path to your text file
-with open(file_path, 'r', encoding='utf-8') as file:
-    file_contents = file.read()  # Reading the content of the file into a string
+def split_text_into_sentences(text: str) -> list[str]:
+ pass
 
-formatted_text = cleanup_whitespaces(file_contents)
 
-export_path = '../../dataset/cleaned_txt/Avinor_clean.txt'  # Path to the export file
-with open(export_path, 'w', encoding='utf-8') as file:
-    file.write(formatted_text)  # Writing the string to the new file
+# # Step 1: Import the text file into a string
+# file_path = '../../dataset/txt/Avinor.txt'  # Path to your text file
+# with open(file_path, 'r', encoding='utf-8') as file:
+#     file_contents = file.read()  # Reading the content of the file into a string
+#
+# formatted_text = cleanup_whitespaces(file_contents)
+#
+# export_path = '../../dataset/cleaned_txt/Avinor_clean.txt'  # Path to the export file
+# with open(export_path, 'w', encoding='utf-8') as file:
+#     file.write(formatted_text)  # Writing the string to the new file
+
+
 
 
