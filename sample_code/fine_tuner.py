@@ -8,13 +8,14 @@ from typing import Dict, List, Union
 import os
 import re
 
+
 class FineTuner:
     """Fine-tunes a pre-trained model on a specific dataset"""
 
-    def __init__(self, model_name, dataset, 
-                 num_epochs=5, 
-                 max_tokenized_length=None, 
-                 logging_steps=500, 
+    def __init__(self, model_name, dataset,
+                 num_epochs=5,
+                 max_tokenized_length=None,
+                 logging_steps=500,
                  do_wandb_logging=True,
                  remove_white_spaces=False,
                  ):
@@ -26,7 +27,7 @@ class FineTuner:
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                                         num_labels=2,
-									                                    low_cpu_mem_usage=True,
+                                                                        low_cpu_mem_usage=True,
                                                                         label2id=self.label2id,
                                                                         id2label=self.id2label)
         self.max_tokenized_length = max_tokenized_length
@@ -41,8 +42,9 @@ class FineTuner:
         # Pre-process dataset
         if remove_white_spaces:
             print("Removing white-spaces")
+
             def remove_newline(dataset):
-                dataset['text'] = re.sub(r'\s+', ' ', dataset['text'])        
+                dataset['text'] = re.sub(r'\s+', ' ', dataset['text'])
                 return dataset
 
             for split_name, split in zip(self.dataset.keys(), self.dataset.values()):
@@ -51,18 +53,18 @@ class FineTuner:
         # Initialize Weights and Biases
         if self.do_wandb_logging:
             self.wandb = wandb.init(project="IDATT2900-072",
-                    config={
-                        'base_model': model_name,
-                        'dataset': dataset['train'].config_name,
-                        'train_dataset_size': len(dataset['train']),
-                        'eval_dataset_size': len(dataset['validation']),
-                        'max_tokenized_length': self.max_tokenized_length,
-                    },
-                    tags=[("no-white-space" if remove_white_spaces else "white-space")]
-                )
+                                    config={
+                                        'base_model': model_name,
+                                        'dataset': dataset['train'].config_name,
+                                        'train_dataset_size': len(dataset['train']),
+                                        'eval_dataset_size': len(dataset['validation']),
+                                        'max_tokenized_length': self.max_tokenized_length,
+                                    },
+                                    tags=[("no-white-space" if remove_white_spaces else "white-space")]
+                                    )
         else:
             os.environ["WANDB_DISABLED"] = "true"
-                       
+
     def tokenize_function(self, examples):
         return self.tokenizer(text_target=examples["text"],
                               padding='max_length',
@@ -78,7 +80,8 @@ class FineTuner:
         self.test_dataset = tokenized_datasets["test"].shuffle(seed=self.seed)
 
         # E.g "bloomz-560m-wiki_labeled-detector"
-        save_name = self.model.config._name_or_path.split("/")[-1] + "-" + self.dataset['train'].config_name + "-detector"
+        save_name = self.model.config._name_or_path.split("/")[-1] + "-" + self.dataset[
+            'train'].config_name + "-detector"
 
         training_args = TrainingArguments(output_dir="./outputs/" + save_name,
                                           logging_dir="./logs",
@@ -136,7 +139,7 @@ class FineTuner:
             res = {prefix + str(key).replace("test", ""): val for key, val in metrics.items()}
             wandb.log(res)
         return metrics
-    
+
     def classify(self, text):
         # Initialize pipeline
         classifier = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, device=0)
@@ -162,7 +165,7 @@ class FineTuner:
         # Calculate probabilities
         probabilities = torch.softmax(logits.cpu(), dim=-1).detach().numpy()
         return probabilities.tolist()
-    
+
     def get_labels(self):
         return self.labels
 
@@ -172,7 +175,7 @@ class FineTuner:
         metric2 = evaluate.load("precision")
         metric3 = evaluate.load("recall")
         metric4 = evaluate.load("f1")
-        
+
         logits, labels = eval_pred
         predictions = np.argmax(logits, axis=-1)
         accuracy = metric1.compute(predictions=predictions, references=labels)["accuracy"]
