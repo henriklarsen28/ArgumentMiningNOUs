@@ -1,8 +1,15 @@
+
 import evaluate
 import numpy as np
 import pandas as pd
+import torch
 from datasets import Dataset, DatasetDict
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 
 
 def load_dataset_from_csv(csv_path, test_size=0.1):
@@ -23,7 +30,11 @@ def load_dataset_from_csv(csv_path, test_size=0.1):
 
     # Create a Dataset from pandas DataFrame
     full_dataset = Dataset.from_pandas(df)
-
+    
+    # Convert labels to integers
+    label2id = {label: i for i, label in enumerate(set(full_dataset['label']))}
+    full_dataset = full_dataset.map(lambda example: {'label': label2id[example['label']]})
+    
     # Split dataset into train and test
     train_test_split = full_dataset.train_test_split(test_size=test_size)
 
@@ -44,7 +55,7 @@ def compute_metrics(eval_pred):
     return metrics
 
 
-class FineTuner:
+class FineTuner2:
     def __init__(self, model_name, csv_path, num_epochs=5, max_tokenized_length=128):
         # Load dataset using the new function
         dataset = load_dataset_from_csv(csv_path)
@@ -65,7 +76,7 @@ class FineTuner:
     def tokenize_function(self, examples):
         return self.tokenizer(
             text=examples["text"],
-            padding="max_length",
+            padding=True,
             truncation=True,
             max_length=self.max_tokenized_length,
             return_tensors="pt")
@@ -99,7 +110,7 @@ class FineTuner:
 
 
 # Usage:
-finetuner = FineTuner(model_name="NBAiLab/nb-bert-large", csv_path="../../dataset/nou_hearings.csv")
+finetuner = FineTuner2(model_name="NBAiLab/nb-bert-large", csv_path="../../dataset/nou_hearings.csv")
 finetuner.train()
 results = finetuner.evaluate()
 print(results)
