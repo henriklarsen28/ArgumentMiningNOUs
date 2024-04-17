@@ -1,8 +1,16 @@
+from typing import Union, List
+
 import evaluate
 import numpy as np
 import pandas as pd
+import torch
 from datasets import Dataset, DatasetDict
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments, pipeline,
+)
 
 
 def load_dataset_from_csv(csv_path, test_size=0.1):
@@ -23,7 +31,11 @@ def load_dataset_from_csv(csv_path, test_size=0.1):
 
     # Create a Dataset from pandas DataFrame
     full_dataset = Dataset.from_pandas(df)
-
+    
+    # Convert labels to integers
+    label2id = {label: i for i, label in enumerate(set(full_dataset['label']))}
+    full_dataset = full_dataset.map(lambda example: {'label': label2id[example['label']]})
+    
     # Split dataset into train and test
     train_test_split = full_dataset.train_test_split(test_size=test_size)
 
@@ -44,8 +56,8 @@ def compute_metrics(eval_pred):
     return metrics
 
 
-class FineTuner:
-    def __init__(self, model_name, csv_path, num_epochs=5, max_tokenized_length=512):
+class FineTuner2:
+    def __init__(self, model_name, csv_path, num_epochs=5, max_tokenized_length=128):
         # Load dataset using the new function
         dataset = load_dataset_from_csv(csv_path)
 
@@ -65,7 +77,7 @@ class FineTuner:
     def tokenize_function(self, examples):
         return self.tokenizer(
             text=examples["text"],
-            padding="max_length",
+            padding=True,
             truncation=True,
             max_length=self.max_tokenized_length,
             return_tensors="pt")
@@ -91,6 +103,32 @@ class FineTuner:
             compute_metrics=compute_metrics,
         )
 
+    def classify(self, text):
+        # Initialize pipeline
+        classifier = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer)
+        return classifier(text)
+
+    def predict(self, data: Union[str, List[str]]) -> torch.Tensor:
+        """
+        Generates a prediction for the data-processing and returns probabilities as a tensor.
+        """
+        # Use GPU if available
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model.to(device)
+
+        # Encode input text and labels
+        encoding = self.tokenizer(data, return_tensors="pt", padding="max_length", truncation=True)
+        encoding = {k: v.to(self.model.device) for k, v in encoding.items()}
+
+        # Execution
+        with torch.no_grad():
+            outputs = self.model(encoding['input_ids'])
+            logits = outputs.logits.squeeze()
+
+        # Calculate probabilities
+        probabilities = torch.softmax(logits.cpu(), dim=-1)
+        return probabilities
+
     def train(self):
         self.trainer.train()
 
@@ -99,7 +137,7 @@ class FineTuner:
 
 
 # Usage:
-finetuner = FineTuner(model_name="NBAiLab/nb-bert-large", csv_path="../../dataset/nou_hearings.csv")
+finetuner = FineTuner2(model_name="NBAiLab/nb-bert-large", csv_path="../../dataset/nou_hearings.csv")
 finetuner.train()
 results = finetuner.evaluate()
 print(results)
