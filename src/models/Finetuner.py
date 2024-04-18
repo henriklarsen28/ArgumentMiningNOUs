@@ -104,7 +104,7 @@ class FineTuner:
         metrics = {}
 
         for metric in self.metric_names:
-            if metric is 'accuracy':
+            if metric == 'accuracy':
                 metrics[metric] = evaluate.load(metric).compute(
                     predictions=predictions, references=labels)[metric]
             else:
