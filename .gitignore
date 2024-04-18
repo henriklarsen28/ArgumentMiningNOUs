@@ -6,5 +6,7 @@ classifiersbert-model/*
 classifiers
 src/models/wandb/*
 src/notebooks/wandb/*
+src/models/__pycache__/Finetuner.cpython-312.pyc
 src/actor_classification/wandb/*
-	src/data_processing/__pycache__/*
+src/data_processing/__pycache__/*
+src/models/__pycache__/*
