@@ -1,3 +1,4 @@
+import pandas as pd
 import spacy
 from gensim import corpora, models
 from gensim.corpora import Dictionary
@@ -138,7 +139,7 @@ class LDA:
         model_list = []
         topic_range = range(topic_interval[0], topic_interval[1] + 1)
 
-        for num_topics in topic_range:
+        for num_topics in tqdm(topic_range, 'Building LDA-models'):
             model = self.build_LDA_model(num_topics=num_topics, passes=passes)
             model_list.append(model)
             coherence_model = CoherenceModel(model=model, texts=self.preprocessed_data, dictionary=self.dictionary,
@@ -147,45 +148,40 @@ class LDA:
 
         return coherence_values, model_list, topic_range, passes
 
-    def extract_arguments(self, documents):
-        arguments = []
+    def extract_arguments(self, dataframe, model):
+        arguments_df = pd.DataFrame(columns=['actor', 'text', 'label'])
 
-        for document in tqdm(documents, desc="Processing Documents"):
-            # Clean the document
-            cleaned_document = cleanup_whitespaces(document)
-            doc = self.nlp(cleaned_document)
+        for _, row in tqdm(dataframe.iterrows(), desc="Processing Documents", total=len(dataframe)):
+            actor = row['actor']
+            document = row['text']
+            label = row['label']
+
+            doc = self.nlp(document)
             sentences = [sentence.text for sentence in doc.sents]
 
-            # Use LDA to find the best model
-            lda_instance = LDA(sentences, self.language, filter_extremes=False)
-            coherence_values, model_list, topic_range, _ = lda_instance.calculate_lda_model_coherences()
-            print('topics', coherence_values.index(max(coherence_values))+2)
-            best_model = model_list[coherence_values.index(max(coherence_values))]
-
-            # Predict topics for each sentence
-            sentence_topics = lda_instance.predict_topics(best_model)
+            sentence_topics = self.predict_topics(model)
 
             # Find sequences of sentences with the same topic longer than two
             current_topic = None
             topic_sequence = []
             for sentence, prediction in zip(sentences, sentence_topics):
-                print(prediction['topic'])
                 if prediction['topic'] == current_topic:
                     topic_sequence.append(sentence)
                 else:
                     if len(topic_sequence) > 2:
-                        arguments.append(' '.join(topic_sequence))
+                        arguments_text = ' '.join(topic_sequence)
+                        arguments_df = arguments_df.append({'actor': actor, 'text': arguments_text, 'label': label},
+                                                           ignore_index=True)
                     current_topic = prediction['topic']
                     topic_sequence = [sentence]
 
             # Catch the last sequence in the document
             if len(topic_sequence) > 2:
-                arguments.append(' '.join(topic_sequence))
+                arguments_text = ' '.join(topic_sequence)
+                arguments_df = arguments_df.append({'actor': actor, 'text': arguments_text, 'label': label},
+                                                   ignore_index=True)
 
-            for arg in arguments:
-                print('\n' + arg)
-
-        return arguments
+        return arguments_df
 
 
 def plot_coherence_scores(topic_range, coherence_values, passes, savefig=None):
