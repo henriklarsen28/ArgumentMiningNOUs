@@ -89,8 +89,9 @@ class FineTuner:
         full_dataset = Dataset.from_pandas(df)
 
         # Convert labels to integers
-        label2id = {label: i for i, label in enumerate(set(full_dataset['label']))}
-        full_dataset = full_dataset.map(lambda example: {'label': label2id[example['label']]})
+        self.label2id = {label: i for i, label in enumerate(set(full_dataset['label']))}
+        self.id2label = {i: label for label, i in self.label2id.items()}
+        full_dataset = full_dataset.map(lambda example: {'label': self.label2id[example['label']]})
 
         # Split dataset into train and test
         train_test_split = full_dataset.train_test_split(seed=self.seed, shuffle=True, test_size=test_size)
@@ -148,6 +149,11 @@ class FineTuner:
     def classify(self, text):
         # Initialize pipeline
         return self.classifier(text)
+    
+    def load_model(self, model_path):
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
+        self.model.to(self.device)
+        self.trainer.model = self.model
 
     def predict(self, data: Union[str, List[str]]) -> torch.Tensor:
         """

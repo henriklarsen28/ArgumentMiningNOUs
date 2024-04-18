@@ -6,3 +6,4 @@ classifiersbert-model/*
 classifiers
 src/models/wandb/*
 src/notebooks/wandb/*
+src/models/__pycache__/Finetuner.cpython-312.pyc
