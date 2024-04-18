@@ -44,7 +44,7 @@ class FineTuner:
 
         # Load dataset
         dataset = self.load_dataset_from_csv(csv_path)
-
+        self.dataset = dataset
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(
@@ -163,6 +163,7 @@ class FineTuner:
         input_ids = encoding['input_ids'].to(self.device)
 
         with torch.no_grad():
+            self.model.to(self.device)
             outputs = self.model(input_ids)
             logits = outputs.logits
 
@@ -177,4 +178,5 @@ class FineTuner:
         self.trainer.train()
 
     def evaluate(self):
+        print(self.dataset["test"])
         return self.trainer.evaluate()
