@@ -134,7 +134,7 @@ class FineTuner:
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
             auto_find_batch_size=True,
-            metric_for_best_model='loss',g
+            metric_for_best_model='loss',
             load_best_model_at_end=True
         )
         return Trainer(
