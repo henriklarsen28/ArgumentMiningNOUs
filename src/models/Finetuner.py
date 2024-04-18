@@ -104,7 +104,12 @@ class FineTuner:
         metrics = {}
 
         for metric in self.metric_names:
-            metrics[metric] = evaluate.load(metric).compute(predictions=predictions, references=labels)[metric]
+            if metric == 'accuracy':
+                metrics[metric] = evaluate.load(metric).compute(
+                    predictions=predictions, references=labels)[metric]
+            else:
+                metrics[metric] = evaluate.load(metric).compute(
+                    predictions=predictions, references=labels, average='macro')[metric]
 
         return metrics
 
@@ -128,7 +133,9 @@ class FineTuner:
             save_strategy='epoch',
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
-            auto_find_batch_size=True)
+            auto_find_batch_size=True,
+            metric_for_best_model='loss'
+        )
         return Trainer(
             model=self.model,
             args=training_args,
@@ -165,15 +172,3 @@ class FineTuner:
 
     def evaluate(self):
         return self.trainer.evaluate()
-
-
-# Run:
-finetuner = FineTuner(model_name="NBAiLab/nb-bert-large",
-                      csv_path="../../dataset/nou_hearings.csv",
-                      num_epochs=10,
-                      metric_names=tuple('accuracy'),
-                      wand_logging=True,
-                      eval_steps=1)
-finetuner.train()
-results = finetuner.evaluate()
-print(results)
