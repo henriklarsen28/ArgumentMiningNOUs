@@ -3,18 +3,35 @@ from gensim import corpora, models
 from gensim.corpora import Dictionary
 from gensim.models import CoherenceModel
 from matplotlib import pyplot as plt
+from tqdm import tqdm
+
+from src.data_processing.text_formatting import cleanup_whitespaces
 
 
 class LDA:
-    def __init__(self, data: list[str], no_below=15, no_above=0.5, language='nb_core_news_md'):
+    def __init__(self, data: list[str], language, no_below=15, no_above=0.5, filter_extremes=True):
+        """
+        Initializes the LDA class with the provided data and configuration settings.
+
+        Parameters:
+            data (list[str]): List of documents as strings.
+            no_below (int): Minimum number of documents a word must appear in to be kept.
+            no_above (float): Maximum proportion of documents a word can appear in to be kept.
+            language (str): The spaCy model to use for text processing.
+        """
         self.data = data
+        self.language = language
         self.nlp = spacy.load(language)
         self.preprocessed_data = self._preprocess()
-        self.corpus, self.dictionary = self._build_corpus(no_below=no_below, no_above=no_above)
+        self.corpus, self.dictionary = self._build_corpus(no_below=no_below, no_above=no_above,
+                                                          filter_extremes=filter_extremes)
 
     def _preprocess(self) -> list[list[str]]:
         """
-        Clean and extract important words and noun phrases.
+        Cleans and extracts important words and noun phrases from the initial data.
+
+        Returns:
+            list[list[str]]: A list of documents where each document is a list of preprocessed tokens.
         """
         preprocessed = []
 
@@ -37,17 +54,56 @@ class LDA:
 
         return preprocessed
 
-    def _build_corpus(self, no_below=15, no_above=0.5) -> tuple[list[list[tuple[int, int]]], Dictionary]:
+    def _build_corpus(self, no_below=15, no_above=0.5, filter_extremes=True):
+        """
+        Builds the corpus and dictionary from the preprocessed data using specified filtering parameters.
+
+        Parameters:
+            no_below (int): Minimum number of documents a word must appear in.
+            no_above (float): Maximum proportion of documents a word can appear in.
+
+        Returns:
+            tuple: Contains the corpus (list of lists of (int, int) tuples) and the dictionary (gensim Dictionary).
+        """
         dictionary = corpora.Dictionary(self.preprocessed_data)
-        dictionary.filter_extremes(no_below=no_below, no_above=no_above, keep_n=100000)
+
+        if filter_extremes:
+            dictionary.filter_extremes(no_below=no_below, no_above=no_above, keep_n=100000)
+
+        if not dictionary:
+            raise ValueError("Empty dictionary generated from data")
+
         corpus = [dictionary.doc2bow(doc) for doc in self.preprocessed_data]
+
+        if not any(corpus):
+            raise ValueError("Empty corpus generated from dictionary")
         return corpus, dictionary
 
     def build_LDA_model(self, num_topics, passes):
+        """
+        Builds and returns an LDA model with the specified number of topics and passes.
+
+        Parameters:
+            num_topics (int): Number of topics for the LDA model.
+            passes (int): Number of passes through the corpus during training.
+
+        Returns:
+            gensim.models.LdaModel: The trained LDA model.
+        """
         lda_model = models.LdaModel(corpus=self.corpus, num_topics=num_topics, id2word=self.dictionary, passes=passes)
         return lda_model
 
     def predict_topics(self, model, relevancy=False):
+        """
+        Predicts the most relevant topics for the documents in the corpus using the specified model.
+
+        Parameters:
+            model (gensim.models.LdaModel): The LDA model used for prediction.
+            relevancy (bool): If True, also returns relevant words from the topics for each document.
+
+        Returns:
+            list[dict]: List of dictionaries containing the topic and confidence of predictions, and optionally relevant words.
+        """
         predictions = []
         for i, bow in enumerate(self.corpus):
             topic_distribution = model.get_document_topics(bow)
@@ -67,10 +123,17 @@ class LDA:
 
         return predictions
 
-    def extract_arguments(self, document):
-        pass
+    def calculate_lda_model_coherences(self, topic_interval=(2, 12), passes=10):
+        """
+        Calculates the coherence scores for a range of topic numbers to evaluate LDA models.
 
-    def plot_coherence(self, topic_interval=(2, 12), passes=10, savefig=None):
+        Parameters:
+            topic_interval (tuple[int, int]): Start and end of the range of topics to test.
+            passes (int): Number of passes through the corpus for each model.
+
+        Returns:
+            tuple: Contains the list of coherence values, the list of LDA models, and the topic range.
+        """
         coherence_values = []
         model_list = []
         topic_range = range(topic_interval[0], topic_interval[1] + 1)
@@ -82,21 +145,80 @@ class LDA:
                                              coherence='c_v')
             coherence_values.append(coherence_model.get_coherence())
 
-        # Plotting the coherence values
-        plt.figure(figsize=(12, 6))
-        plt.plot(topic_range, coherence_values, label=f'Passes: {passes}')
-        plt.xlabel("Number of Topics")
-        plt.ylabel("Coherence score")
-        plt.title("Coherence Scores for LDA Models")
-        plt.xticks(topic_range)
-        plt.legend()
+        return coherence_values, model_list, topic_range, passes
 
-        if savefig:
-            plt.savefig(f'../../plots/{savefig}.png')
-        plt.show()
+    def extract_arguments(self, documents):
+        arguments = []
+
+        for document in tqdm(documents, desc="Processing Documents"):
+            # Clean the document
+            cleaned_document = cleanup_whitespaces(document)
+            doc = self.nlp(cleaned_document)
+            sentences = [sentence.text for sentence in doc.sents]
+
+            # Use LDA to find the best model
+            lda_instance = LDA(sentences, self.language, filter_extremes=False)
+            coherence_values, model_list, topic_range, _ = lda_instance.calculate_lda_model_coherences()
+            print('topics', coherence_values.index(max(coherence_values))+2)
+            best_model = model_list[coherence_values.index(max(coherence_values))]
+
+            # Predict topics for each sentence
+            sentence_topics = lda_instance.predict_topics(best_model)
+
+            # Find sequences of sentences with the same topic longer than two
+            current_topic = None
+            topic_sequence = []
+            for sentence, prediction in zip(sentences, sentence_topics):
+                print(prediction['topic'])
+                if prediction['topic'] == current_topic:
+                    topic_sequence.append(sentence)
+                else:
+                    if len(topic_sequence) > 2:
+                        arguments.append(' '.join(topic_sequence))
+                    current_topic = prediction['topic']
+                    topic_sequence = [sentence]
+
+            # Catch the last sequence in the document
+            if len(topic_sequence) > 2:
+                arguments.append(' '.join(topic_sequence))
+
+            for arg in arguments:
+                print('\n' + arg)
+
+        return arguments
+
+
+def plot_coherence_scores(topic_range, coherence_values, passes, savefig=None):
+    """
+    Plots coherence scores over a range of topic numbers to visualize the performance of LDA models.
+
+    Parameters:
+        topic_range (range): The range of topics over which coherence was computed.
+        coherence_values (list[float]): The list of coherence scores corresponding to each topic in topic_range.
+        passes (int): Number of passes through the corpus for each model used in coherence calculation.
+        savefig (str, optional): Path to save the figure to. If None, the figure is shown but not saved.
+    """
+    plt.figure(figsize=(12, 6))
+    plt.plot(topic_range, coherence_values, label=f'Passes: {passes}')
+    plt.xlabel("Number of Topics")
+    plt.ylabel("Coherence score")
+    plt.title("Coherence Scores for LDA Models")
+    plt.xticks(topic_range)
+    plt.legend()
+
+    if savefig:
+        plt.savefig(savefig)
+    plt.show()
 
 
 def plot_topic_distribution(dataframe, savefig=None):
+    """
+    Plots the distribution of topics in the data, segmented by class.
+
+    Parameters:
+        dataframe (pandas.DataFrame): DataFrame containing topic predictions and class labels.
+        savefig (str, optional): Filename to save the plot. If None, the plot is not saved.
+    """
     dataframe['topic'] = dataframe['topic_predictions'].apply(lambda x: x['topic'])
     grouped = dataframe.groupby(['topic', 'actor_label']).size().unstack(fill_value=0)
 
@@ -118,6 +240,3 @@ def plot_topic_distribution(dataframe, savefig=None):
         plt.savefig(f'../../plots/{savefig}.png')
 
     plt.show()
-
-
-
