@@ -3,3 +3,5 @@ dataset/pdf*.csv
 dataset/pdf/*.pdf
 .vscode/settings.json
 classifiersbert-model/*
+classifiers
+src/models/wandb/*
