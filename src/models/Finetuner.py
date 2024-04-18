@@ -14,6 +14,8 @@ from transformers import (
     TrainingArguments, pipeline,
 )
 
+torch.manual_seed(seed=42)
+
 
 def select_device():
     if torch.backends.mps.is_available():
@@ -39,34 +41,29 @@ class FineTuner:
         self.wandb_logging = wand_logging
         self.eval_steps = eval_steps
         self.output_name = output_name
-        self.device = select_device()
-        print(f'Device: {self.device}')
 
         # Load dataset
-        dataset = self.load_dataset_from_csv(csv_path)
-        self.dataset = dataset
+        self.dataset, self.labels, self.label2id, self.id2label = self.load_dataset_from_csv(csv_path)
+
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(
-            model_name, num_labels=len(set(dataset['train']['label'])),
-            id2label={i: label for i, label in enumerate(set(dataset['train']['label']))},
-            label2id={label: i for i, label in enumerate(set(dataset['train']['label']))})
-
-        self.model.to(self.device)
+            model_name, num_labels=len(self.labels),
+            id2label=self.id2label,
+            label2id=self.label2id)
 
         # Initialize trainer
-        self.trainer = self.init_trainer(dataset)
-        self.classifier = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer,
-                                   device=self.device.index if self.device.type != 'cpu' else -1)
+        self.trainer = self.init_trainer(self.dataset)
+        self.classifier = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer)
 
         # Initialize Weights and Biases
         if self.wandb_logging:
             self.wandb = wandb.init(project="TDT4310-NLP",
                                     config={
                                         'base_model': model_name,
-                                        'dataset': dataset['train'].config_name,
-                                        'train_dataset_size': len(dataset['train']),
-                                        'eval_dataset_size': len(dataset['test']),
+                                        'dataset': self.dataset['train'].config_name,
+                                        'train_dataset_size': len(self.dataset['train']),
+                                        'eval_dataset_size': len(self.dataset['test']),
                                         'max_tokenized_length': self.max_tokenized_length,
                                     })
         else:
@@ -87,15 +84,16 @@ class FineTuner:
         df = pd.read_csv(csv_path)
         df = df[['text', 'label']].dropna()
         full_dataset = Dataset.from_pandas(df)
+        labels = sorted(list(set(full_dataset['label'])))
 
         # Convert labels to integers
-        self.label2id = {label: i for i, label in enumerate(set(full_dataset['label']))}
-        self.id2label = {i: label for label, i in self.label2id.items()}
-        full_dataset = full_dataset.map(lambda example: {'label': self.label2id[example['label']]})
+        label2id = {label: i for i, label in enumerate(labels)}
+        id2label = {i: label for i, label in enumerate(labels)}
+        full_dataset = full_dataset.map(lambda dp: {'label': label2id[dp['label']]})
 
         # Split dataset into train and test
-        train_test_split = full_dataset.train_test_split(seed=self.seed, shuffle=True, test_size=test_size)
-        return train_test_split
+        train_test_split = full_dataset.train_test_split(shuffle=False, test_size=test_size)
+        return train_test_split, labels, label2id, id2label
 
     def compute_metrics(self, eval_pred):
         """Function for computing evaluation metrics"""
@@ -122,20 +120,23 @@ class FineTuner:
             max_length=self.max_tokenized_length,
             return_tensors="pt")
 
-    def init_trainer(self, dataset):
+    def init_trainer(self, dataset: Dataset):
         tokenized_datasets = dataset.map(self.tokenize_function, batched=True)
-        train_dataset = tokenized_datasets["train"].shuffle(seed=self.seed)
-        test_dataset = tokenized_datasets["test"].shuffle(seed=self.seed)
+        train_dataset = tokenized_datasets["train"]
+        test_dataset = tokenized_datasets["test"]
+
+        print(train_dataset[0:3])
+        print(test_dataset[1])
 
         training_args = TrainingArguments(
             output_dir=os.path.join("../../classifiers", self.output_name),
             evaluation_strategy="steps",
             eval_steps=self.eval_steps,
-            save_strategy='epoch',
+            save_strategy='steps',
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
             auto_find_batch_size=True,
-            metric_for_best_model='loss'
+            metric_for_best_model='accuracy'
         )
         return Trainer(
             model=self.model,
@@ -149,10 +150,9 @@ class FineTuner:
     def classify(self, text):
         # Initialize pipeline
         return self.classifier(text)
-    
+
     def load_model(self, model_path):
         self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
-        self.model.to(self.device)
         self.trainer.model = self.model
 
     def predict(self, data: Union[str, List[str]]) -> torch.Tensor:

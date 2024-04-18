@@ -149,7 +149,7 @@ class LDA:
         return coherence_values, model_list, topic_range, passes
 
     def extract_arguments(self, dataframe, model):
-        arguments_df = pd.DataFrame(columns=['actor', 'text', 'label'])
+        mined_arguments = []
 
         for _, row in tqdm(dataframe.iterrows(), desc="Processing Documents", total=len(dataframe)):
             actor = row['actor']
@@ -170,18 +170,19 @@ class LDA:
                 else:
                     if len(topic_sequence) > 2:
                         arguments_text = ' '.join(topic_sequence)
-                        arguments_df = arguments_df.append({'actor': actor, 'text': arguments_text, 'label': label},
-                                                           ignore_index=True)
+                        row = {'actor': actor, 'text': arguments_text, 'label': label}
+                        mined_arguments.append(row)
+
                     current_topic = prediction['topic']
                     topic_sequence = [sentence]
 
             # Catch the last sequence in the document
             if len(topic_sequence) > 2:
                 arguments_text = ' '.join(topic_sequence)
-                arguments_df = arguments_df.append({'actor': actor, 'text': arguments_text, 'label': label},
-                                                   ignore_index=True)
+                row = {'actor': actor, 'text': arguments_text, 'label': label}
+                mined_arguments.append(row)
 
-        return arguments_df
+        return pd.DataFrame(mined_arguments)
 
 
 def plot_coherence_scores(topic_range, coherence_values, passes, savefig=None):
@@ -216,7 +217,7 @@ def plot_topic_distribution(dataframe, savefig=None):
         savefig (str, optional): Filename to save the plot. If None, the plot is not saved.
     """
     dataframe['topic'] = dataframe['topic_predictions'].apply(lambda x: x['topic'])
-    grouped = dataframe.groupby(['topic', 'actor_label']).size().unstack(fill_value=0)
+    grouped = dataframe.groupby(['topic', 'label']).size().unstack(fill_value=0)
 
     class_totals = grouped.sum()  # Frequency of each class
     grouped_percentage = grouped.div(class_totals) * 100
