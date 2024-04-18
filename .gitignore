@@ -5,3 +5,4 @@ dataset/pdf/*.pdf
 classifiersbert-model/*
 classifiers
 src/models/wandb/*
+src/actor_classification/wandb/*
