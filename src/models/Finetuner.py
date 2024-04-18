@@ -104,7 +104,12 @@ class FineTuner:
         metrics = {}
 
         for metric in self.metric_names:
-            metrics[metric] = evaluate.load(metric).compute(predictions=predictions, references=labels)[metric]
+            if metric is 'accuracy':
+                metrics[metric] = evaluate.load(metric).compute(
+                    predictions=predictions, references=labels)[metric]
+            else:
+                metrics[metric] = evaluate.load(metric).compute(
+                    predictions=predictions, references=labels, average='macro')[metric]
 
         return metrics
 
@@ -171,9 +176,9 @@ class FineTuner:
 finetuner = FineTuner(model_name="NBAiLab/nb-bert-large",
                       csv_path="../../dataset/nou_hearings.csv",
                       num_epochs=10,
-                      metric_names=tuple('accuracy'),
+                      metric_names=('accuracy', 'recall', 'precision', 'f1'),
                       wand_logging=True,
-                      eval_steps=1)
+                      eval_steps=2)
 finetuner.train()
 results = finetuner.evaluate()
 print(results)
