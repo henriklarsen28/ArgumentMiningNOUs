@@ -25,7 +25,7 @@ def select_device():
 
 
 class FineTuner:
-    def __init__(self, model_name: str, csv_path: str,
+    def __init__(self, model_name: str, csv_path: str, output_name: str,
                  num_epochs: int = 5,
                  max_tokenized_length: int = 512,
                  metric_names: tuple = tuple('accuracy'),
@@ -38,7 +38,7 @@ class FineTuner:
         self.metric_names = metric_names
         self.wandb_logging = wand_logging
         self.eval_steps = eval_steps
-
+        self.output_name = output_name
         self.device = select_device()
         print(f'Device: {self.device}')
 
@@ -127,7 +127,7 @@ class FineTuner:
         test_dataset = tokenized_datasets["test"].shuffle(seed=self.seed)
 
         training_args = TrainingArguments(
-            output_dir=os.path.join("../../classifiers", 'bert-model'),
+            output_dir=os.path.join("../../classifiers", self.output_name),
             evaluation_strategy="steps",
             eval_steps=self.eval_steps,
             save_strategy='epoch',

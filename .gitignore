@@ -6,3 +6,5 @@ classifiersbert-model/*
 classifiers
 src/models/wandb/*
 src/notebooks/wandb/*
+src/actor_classification/wandb/*
+	src/data_processing/__pycache__/*
