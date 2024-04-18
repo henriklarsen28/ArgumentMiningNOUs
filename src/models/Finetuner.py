@@ -133,7 +133,10 @@ class FineTuner:
             save_strategy='epoch',
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
-            auto_find_batch_size=True)
+            auto_find_batch_size=True,
+            metric_for_best_model='loss',g
+            load_best_model_at_end=True
+        )
         return Trainer(
             model=self.model,
             args=training_args,
@@ -170,15 +173,3 @@ class FineTuner:
 
     def evaluate(self):
         return self.trainer.evaluate()
-
-
-# Run:
-finetuner = FineTuner(model_name="NBAiLab/nb-bert-large",
-                      csv_path="../../dataset/nou_hearings.csv",
-                      num_epochs=10,
-                      metric_names=('accuracy', 'recall', 'precision', 'f1'),
-                      wand_logging=True,
-                      eval_steps=2)
-finetuner.train()
-results = finetuner.evaluate()
-print(results)
