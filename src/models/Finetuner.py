@@ -29,13 +29,15 @@ class FineTuner:
                  num_epochs: int = 5,
                  max_tokenized_length: int = 512,
                  metric_names: tuple = tuple('accuracy'),
-                 wand_logging: bool = True):
+                 wand_logging: bool = True,
+                 eval_steps: int = 50):
         # Run time constants
         self.max_tokenized_length = max_tokenized_length
         self.num_epochs = num_epochs
         self.seed = 42
         self.metric_names = metric_names
         self.wandb_logging = wand_logging
+        self.eval_steps = eval_steps
 
         self.device = select_device()
         print(f'Device: {self.device}')
@@ -122,7 +124,7 @@ class FineTuner:
         training_args = TrainingArguments(
             output_dir=os.path.join("../../classifiers", 'bert-model'),
             evaluation_strategy="steps",
-            eval_steps=100,
+            eval_steps=self.eval_steps,
             save_strategy='epoch',
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
@@ -169,8 +171,9 @@ class FineTuner:
 finetuner = FineTuner(model_name="NBAiLab/nb-bert-large",
                       csv_path="../../dataset/nou_hearings.csv",
                       num_epochs=10,
-                      metric_names=('accuracy', 'recall', 'precision', 'f1'),
-                      wand_logging=True)
+                      metric_names=tuple('accuracy'),
+                      wand_logging=True,
+                      eval_steps=1)
 finetuner.train()
 results = finetuner.evaluate()
 print(results)
