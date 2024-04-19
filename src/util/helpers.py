@@ -4,7 +4,6 @@ import pandas as pd
 import torch
 from datasets import Dataset
 
-g
 def id2label(idx):
     # Read json file
     with open('../../dataset/label2id.json') as f:
