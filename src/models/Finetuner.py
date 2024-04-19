@@ -1,9 +1,7 @@
 import os
-from typing import Union, List
 
 import evaluate
 import numpy as np
-import pandas as pd
 import torch
 import wandb
 from datasets import Dataset, DatasetDict
@@ -13,6 +11,7 @@ from transformers import (
     Trainer,
     TrainingArguments, pipeline,
 )
+from src.util.helpers import load_dataset_from_csv
 
 torch.manual_seed(seed=42)
 
@@ -35,7 +34,7 @@ class FineTuner:
         self.output_name = output_name
 
         # Load dataset
-        self.dataset, num_labels = self.load_dataset_from_csv(csv_path)
+        self.dataset, num_labels = load_dataset_from_csv(csv_path)
 
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -57,27 +56,6 @@ class FineTuner:
                                     })
         else:
             os.environ["WANDB_DISABLED"] = "true"
-
-    def load_dataset_from_csv(self, csv_path, test_size=0.1):
-        """
-        Loads a dataset from a CSV file, preprocesses it, and splits it into training and test sets.
-
-        Args:
-            self (str): The file path to the CSV file containing the dataset.
-            test_size (float): The proportion of the dataset to include in the test split.
-
-        Returns:
-            DatasetDict: A dictionary containing 'train' and 'test' datasets.
-        """
-        # Load data from CSV
-        df = pd.read_csv(csv_path)
-        df = df[['text', 'label']].dropna()
-        full_dataset = Dataset.from_pandas(df)
-
-        train_test_split = full_dataset.train_test_split(seed=self.seed, test_size=test_size)
-        num_labels = len(set(df['label']))
-        print(num_labels)
-        return train_test_split, num_labels
 
     def compute_metrics(self, eval_pred):
         """Function for computing evaluation metrics"""
