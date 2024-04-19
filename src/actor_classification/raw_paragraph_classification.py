@@ -1,33 +1,4 @@
-from src.models.Finetuner import FineTuner
-
-nbbert = "NbAiLab/nb-bert-large"
-
-
-def train_and_save_classifiers(output_name, num_epochs, csv_path):
-    finetuner = FineTuner(model_name=nbbert,
-                          csv_path=csv_path,
-                          output_folder="../../classifiers",
-                          output_name=output_name,
-                          num_epochs=num_epochs,
-                          metric_names=('accuracy', 'recall', 'precision', 'f1'),
-                          wand_logging=True,
-                          eval_steps=30)
-    finetuner.train()
-    results = finetuner.evaluate()
-    print(results)
-
-
-def load_and_evaluate(model_path, csv_path):
-    finetuner = FineTuner(model_name=model_path,
-                          csv_path=csv_path,
-                          output_folder="../../classifiers",
-                          output_name="no-name",
-                          num_epochs=1,
-                          metric_names=('accuracy', 'recall', 'precision', 'f1'),
-                          wand_logging=True,
-                          eval_steps=2)
-    results = finetuner.evaluate()
-    print(results)
+from finetuning import train_and_save_classifiers, load_and_evaluate
 
 
 train_and_save_classifiers('Raw-Classifier', num_epochs=6, csv_path="../../dataset/nou_hearings.csv")
@@ -39,7 +10,7 @@ load_and_evaluate('../../classifiers/Raw-Classifier', csv_path='../../dataset/no
 
 # train_and_save_classifiers('ICL-Classifier', num_epochs=5,
 #                           csv_path="../../dataset/cleaned_arguments_in_context_learning.csv")
-# train_and_save_classifiers('Raw-Classifier', num_epochs=5, csv_path="../../dataset/LDA-Arguments.csv")
+# train_and_save_classifiers('Raw-Classifier', num_epochs=5, csv_path="../../dataset/LDA_Arguments.csv")
 
 # wandb: Run history:
 # wandb:           eval/accuracy ▁▃▄▄▅▆▅▆▆▇▇▇▇▇▇▇▇██▇█▇██▇██████▇███
