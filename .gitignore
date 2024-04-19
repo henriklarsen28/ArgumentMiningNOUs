@@ -8,7 +8,7 @@ src/models/wandb/*
 src/notebooks/wandb/*
 src/models/__pycache__/Finetuner.cpython-312.pyc
 src/actor_classification/wandb/*
-src/data_processing/__pycache__/*
-src/models/__pycache__/*
 src/model_architecture/*
+*__pycache__
+__pycache__
 

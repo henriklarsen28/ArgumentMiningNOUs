@@ -5,17 +5,22 @@ import torch
 from datasets import Dataset
 
 
+<<<<<<< HEAD
+def id2label(idx):
+=======
 def id2label(idx):
     # Read json file
-
+    with open('../../dataset/label2id.json') as f:
+        dicti = json.loads(f.read())
+        id2lab = {idx: label for label, idx in dicti.items()}
+        label = id2lab[idx]
+        return label
+    
+def labels():
     with open('../../dataset/label2id.json') as f:
         # Convert json file to dictionary
         dicti = json.loads(f.read())
-        print(dicti)
-        id2lab = {idx: label for label, idx in dicti.items()}
-        # Find the value
-        label = id2lab[idx]
-        return label
+        return dicti.keys()
 
 
 def select_device():
