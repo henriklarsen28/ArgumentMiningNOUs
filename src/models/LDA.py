@@ -10,6 +10,7 @@ import sys
 sys.path.append('..')
 
 from data_processing.text_formatting import cleanup_whitespaces
+from util.helpers import id2label
 
 
 class LDA:
@@ -219,6 +220,7 @@ def plot_topic_distribution(dataframe, savefig=None):
         dataframe (pandas.DataFrame): DataFrame containing topic predictions and class labels.
         savefig (str, optional): Filename to save the plot. If None, the plot is not saved.
     """
+    dataframe['label'] = dataframe['label'].apply(id2label)
     dataframe['topic'] = dataframe['topic_predictions'].apply(lambda x: x['topic'])
     grouped = dataframe.groupby(['topic', 'label']).size().unstack(fill_value=0)
 
