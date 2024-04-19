@@ -1,4 +1,4 @@
-from src.models.Finetuner import FineTuner
+from src.actor_classification.Finetuner import FineTuner
 
 nbbert = "NbAiLab/nb-bert-large"
 
