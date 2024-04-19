@@ -4,10 +4,7 @@ import pandas as pd
 import torch
 from datasets import Dataset
 
-
-<<<<<<< HEAD
-def id2label(idx):
-=======
+g
 def id2label(idx):
     # Read json file
     with open('../../dataset/label2id.json') as f:
@@ -15,7 +12,8 @@ def id2label(idx):
         id2lab = {idx: label for label, idx in dicti.items()}
         label = id2lab[idx]
         return label
-    
+
+
 def labels():
     with open('../../dataset/label2id.json') as f:
         # Convert json file to dictionary
