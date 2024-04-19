@@ -1,5 +1,6 @@
 from transformers import pipeline
 from pandas import DataFrame
+from src.util.helpers import select_device
 
 classifier = pipeline('text-classification', model="NicolaiSivesind/NOU-Classifier-Raw", device="mps")
 
@@ -21,4 +22,4 @@ class Classifier:
         self.test_df = test_df
         self.pipe = pipeline('text-classification',
                              model="NicolaiSivesind/NOU-Classifier-Raw",
-                             device="mps")
+                             device=select_device())
