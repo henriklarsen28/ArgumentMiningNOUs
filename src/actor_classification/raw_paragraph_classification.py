@@ -1,15 +1,42 @@
 from src.models.Finetuner import FineTuner
 
-finetuner = FineTuner(model_name="NBAiLab/nb-bert-large",
-                      csv_path="../../dataset/nou_hearings.csv",
-                      output_name='Raw-Classifier',
-                      num_epochs=5,
-                      metric_names=('accuracy', 'recall', 'precision', 'f1'),
-                      wand_logging=True,
-                      eval_steps=50)
-finetuner.train()
-results = finetuner.evaluate()
-print(results)
+nbbert = "NbAiLab/nb-bert-large"
+
+
+def train_and_save_classifiers(output_name, num_epochs, csv_path):
+    finetuner = FineTuner2(model_name=nbbert,
+                           csv_path=csv_path,
+                           # output_folder="../../classifiers",
+                           output_name=output_name,
+                           num_epochs=num_epochs,
+                           metric_names=('accuracy', 'recall', 'precision', 'f1'),
+                           wand_logging=True,
+                           eval_steps=10)
+    finetuner.train()
+    results = finetuner.evaluate()
+    print(results)
+
+
+def load_and_evaluate(model_path, csv_path):
+    finetuner = FineTuner2(model_name=model_path,
+                           csv_path=csv_path,
+                           output_folder="../../classifiers",
+                           output_name="no-name",
+                           num_epochs=1,
+                           metric_names=('accuracy', 'recall', 'precision', 'f1'),
+                           wand_logging=True,
+                           eval_steps=2)
+    results = finetuner.evaluate()
+    print(results)
+
+
+train_and_save_classifiers('Raw-Classifier', num_epochs=0.2, csv_path="../../dataset/nou_hearings.csv")
+# train_and_save_classifiers('ICL-Classifier', num_epochs=10,
+#                           csv_path="../../dataset/cleaned_arguments_in_context_learning.csv.csv")
+
+# train_and_save_classifiers('ICL-Classifier', num_epochs=5,
+#                           csv_path="../../dataset/cleaned_arguments_in_context_learning.csv")
+# train_and_save_classifiers('Raw-Classifier', num_epochs=5, csv_path="../../dataset/LDA-Arguments.csv")
 
 # wandb: Run history:
 # wandb:           eval/accuracy ▁▃▄▄▅▆▅▆▆▇▇▇▇▇▇▇▇██▇█▇██▇██████▇███
@@ -45,4 +72,3 @@ print(results)
 # wandb:            train_runtime 4620.629
 # wandb: train_samples_per_second 2.968
 # wandb:   train_steps_per_second 0.371
-

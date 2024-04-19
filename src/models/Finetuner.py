@@ -27,7 +27,7 @@ def select_device():
 
 
 class FineTuner:
-    def __init__(self, model_name: str, csv_path: str, output_name: str,
+    def __init__(self, model_name: str, csv_path: str, output_folder: str, output_name: str,
                  num_epochs: int = 5,
                  max_tokenized_length: int = 512,
                  metric_names: tuple = tuple('accuracy'),
@@ -40,6 +40,7 @@ class FineTuner:
         self.metric_names = metric_names
         self.wandb_logging = wand_logging
         self.eval_steps = eval_steps
+        self.output_folder = output_folder
         self.output_name = output_name
 
         # Load dataset
@@ -92,7 +93,7 @@ class FineTuner:
         full_dataset = full_dataset.map(lambda dp: {'label': label2id[dp['label']]})
 
         # Split dataset into train and test
-        train_test_split = full_dataset.train_test_split(shuffle=False, test_size=test_size)
+        train_test_split = full_dataset.train_test_split(seed=self.seed, shuffle=False, test_size=test_size)
         return train_test_split, labels, label2id, id2label
 
     def compute_metrics(self, eval_pred):
@@ -125,18 +126,15 @@ class FineTuner:
         train_dataset = tokenized_datasets["train"]
         test_dataset = tokenized_datasets["test"]
 
-        print(train_dataset[0:3])
-        print(test_dataset[1])
-
         training_args = TrainingArguments(
-            output_dir=os.path.join("../../classifiers", self.output_name),
+            output_dir=os.path.join(self.output_folder, self.output_name),
             evaluation_strategy="steps",
-            eval_steps=self.eval_steps,
             save_strategy='steps',
+            eval_steps=self.eval_steps,
+            save_steps=self.eval_steps,
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
             auto_find_batch_size=True,
-            metric_for_best_model='accuracy'
         )
         return Trainer(
             model=self.model,
@@ -176,7 +174,7 @@ class FineTuner:
 
     def train(self):
         self.trainer.train()
+        self.trainer.save_model(os.path.join(self.output_folder, self.output_name+"-Final"))
 
     def evaluate(self):
-        print(self.dataset["test"])
         return self.trainer.evaluate()
