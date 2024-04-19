@@ -29,8 +29,9 @@ def load_and_evaluate(model_path, csv_path):
     results = finetuner.evaluate()
     print(results)
 
-
-train_and_save_classifiers('Raw-Classifier', num_epochs=3, csv_path="../../dataset/nou_hearings-1.csv")
+load_and_evaluate('../../classifiers/Raw-Classifier', csv_path='../../dataset/nou_hearings.csv')
+#train_and_save_classifiers('Raw-Classifier', num_epochs=6, csv_path="../../dataset/nou_hearings.csv")
+#train_and_save_classifiers('ICL-Classifier', num_epochs=6, csv_path="../../dataset/nou_hearings.csv")
 # train_and_save_classifiers('ICL-Classifier', num_epochs=10,
 #                           csv_path="../../dataset/cleaned_arguments_in_context_learning.csv.csv")
 
