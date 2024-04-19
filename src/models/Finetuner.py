@@ -17,15 +17,6 @@ from transformers import (
 torch.manual_seed(seed=42)
 
 
-def select_device():
-    if torch.backends.mps.is_available():
-        return torch.device("mps")
-    elif torch.cuda.is_available():
-        return torch.device("cuda")
-    else:
-        return torch.device("cpu")
-
-
 class FineTuner:
     def __init__(self, model_name: str, csv_path: str, output_folder: str, output_name: str,
                  num_epochs: int = 5,
@@ -44,14 +35,11 @@ class FineTuner:
         self.output_name = output_name
 
         # Load dataset
-        self.dataset, self.labels, self.label2id, self.id2label = self.load_dataset_from_csv(csv_path)
+        self.dataset, num_labels = self.load_dataset_from_csv(csv_path)
 
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.model = AutoModelForSequenceClassification.from_pretrained(
-            model_name, num_labels=len(self.labels),
-            id2label=self.id2label,
-            label2id=self.label2id)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
 
         # Initialize trainer
         self.trainer = self.init_trainer(self.dataset)
@@ -85,16 +73,11 @@ class FineTuner:
         df = pd.read_csv(csv_path)
         df = df[['text', 'label']].dropna()
         full_dataset = Dataset.from_pandas(df)
-        labels = sorted(list(set(full_dataset['label'])))
 
-        # Convert labels to integers
-        label2id = {label: i for i, label in enumerate(labels)}
-        id2label = {i: label for i, label in enumerate(labels)}
-        full_dataset = full_dataset.map(lambda dp: {'label': label2id[dp['label']]})
-
-        # Split dataset into train and test
-        train_test_split = full_dataset.train_test_split(seed=self.seed, shuffle=False, test_size=test_size)
-        return train_test_split, labels, label2id, id2label
+        train_test_split = full_dataset.train_test_split(seed=self.seed, test_size=test_size)
+        num_labels = len(set(df['label']))
+        print(num_labels)
+        return train_test_split, num_labels
 
     def compute_metrics(self, eval_pred):
         """Function for computing evaluation metrics"""
@@ -129,12 +112,13 @@ class FineTuner:
         training_args = TrainingArguments(
             output_dir=os.path.join(self.output_folder, self.output_name),
             evaluation_strategy="steps",
-            save_strategy='steps',
             eval_steps=self.eval_steps,
-            save_steps=self.eval_steps,
+            save_strategy='steps',
+            save_steps=500,
             optim='adamw_torch',
             num_train_epochs=self.num_epochs,
             auto_find_batch_size=True,
+            load_best_model_at_end=False,
         )
         return Trainer(
             model=self.model,
@@ -144,33 +128,6 @@ class FineTuner:
             tokenizer=self.tokenizer,
             compute_metrics=self.compute_metrics,
         )
-
-    def classify(self, text):
-        # Initialize pipeline
-        return self.classifier(text)
-
-    def load_model(self, model_path):
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
-        self.trainer.model = self.model
-
-    def predict(self, data: Union[str, List[str]]) -> torch.Tensor:
-        """
-        Generates a prediction for the data and returns probabilities as a tensor.
-        """
-        encoding = self.tokenizer(data, return_tensors="pt", padding="max_length", truncation=True)
-        input_ids = encoding['input_ids'].to(self.device)
-
-        with torch.no_grad():
-            self.model.to(self.device)
-            outputs = self.model(input_ids)
-            logits = outputs.logits
-
-            # Ensure batch size is handled correctly
-            if logits.dim() == 1:
-                logits = logits.unsqueeze(0)
-            probabilities = torch.softmax(logits, dim=-1)
-
-        return probabilities
 
     def train(self):
         self.trainer.train()
