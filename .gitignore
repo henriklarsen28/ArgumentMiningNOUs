@@ -7,7 +7,7 @@ classifiers
 src/models/wandb/*
 src/notebooks/wandb/*
 src/models/__pycache__/Finetuner.cpython-312.pyc
-src/bert_finetuner/wandb/*
+src/bert_train/wandb/*
 src/model_architecture/*
 *__pycache__
 __pycache__
