@@ -4,13 +4,13 @@ import evaluate
 import numpy as np
 import torch
 import wandb
-from datasets import Dataset, DatasetDict
+from datasets import Dataset
 from sklearn.metrics import mean_squared_error
 from transformers import (
     AutoModelForSequenceClassification,
     AutoTokenizer,
     Trainer,
-    TrainingArguments, pipeline,
+    TrainingArguments,
 )
 from src.util.helpers import load_dataset_from_csv, configure_for_regression
 
@@ -42,8 +42,6 @@ class FineTuner:
             num_labels = 1
             self.dataset['train'] = configure_for_regression(self.dataset['train'])
             self.dataset['test'] = configure_for_regression(self.dataset['test'])
-            print(self.dataset['train'][0])
-            self.metric_names = ('mean_squared_error',)
 
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -77,6 +75,7 @@ class FineTuner:
                 metrics[metric] = evaluate.load(metric).compute(
                     predictions=predictions, references=labels)[metric]
             elif self.regression:
+                predictions = logits.squeeze()
                 mse = mean_squared_error(labels, predictions)
                 metrics['mse'] = mse
             else:
