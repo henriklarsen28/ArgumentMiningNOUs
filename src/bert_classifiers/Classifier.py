@@ -1,6 +1,6 @@
 from transformers import pipeline
 from pandas import DataFrame
-from src.util.helpers import select_device
+from util.helpers import select_device
 
 tokenizer_config = {'padding': True, 'truncation': True, 'max_length': 512}
 
