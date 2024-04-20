@@ -13,8 +13,6 @@ from transformers import (
 )
 from src.util.helpers import load_dataset_from_csv
 
-torch.manual_seed(seed=42)
-
 
 class FineTuner:
     def __init__(self, model_name: str, csv_path: str, output_folder: str, output_name: str,
@@ -42,7 +40,6 @@ class FineTuner:
 
         # Initialize trainer
         self.trainer = self.init_trainer(self.dataset)
-        self.classifier = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer)
 
         # Initialize Weights and Biases
         if self.wandb_logging:
