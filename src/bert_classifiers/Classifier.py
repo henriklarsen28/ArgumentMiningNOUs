@@ -1,8 +1,9 @@
 from transformers import pipeline
-from pandas import DataFrame
-from util.helpers import select_device
+import pandas as pd
+from src.util.helpers import select_device, load_dataset_from_csv
 
 tokenizer_config = {'padding': True, 'truncation': True, 'max_length': 512}
+
 
 def predict_dataset(model: str, test_df):
     classifier = pipeline('text-classification', model=model, device=select_device())
@@ -12,3 +13,12 @@ def predict_dataset(model: str, test_df):
     test_df['prediction'] = predict_column
 
     return test_df
+
+
+def produce_test_result_matrix(dataset_name, classifier_name, output_name):
+    dataset, _ = load_dataset_from_csv(csv_path=f"../../dataset/{dataset_name}")
+    test_df = dataset['test'].to_pandas()
+
+    pred_df = predict_dataset(model=f"../../classifiers/{classifier_name}", test_df=test_df)
+    pred_df.to_csv(f"../../inference_results/{output_name}")
+    return pd.read_csv(f"../../inference_results/{output_name}")
