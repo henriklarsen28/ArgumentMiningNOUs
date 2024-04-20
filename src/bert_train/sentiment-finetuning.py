@@ -1,13 +1,8 @@
-from finetuning import train_and_save_classifiers, load_and_evaluate
+from finetuning import train_and_save_classifiers
 from datasets import load_dataset
 import pandas as pd
 
 path = "../../dataset/norec.csv"
-
-
-def train():
-    train_and_save_classifiers('Sentiment-Classifier', num_epochs=3, csv_path=path)
-    # load_and_evaluate('../../classifiers/Raw-Classifier', csv_path=path)
 
 
 def extract_dataset():
@@ -28,5 +23,3 @@ def load():
     print(df.head())
 
 
-# extract_dataset()
-train()

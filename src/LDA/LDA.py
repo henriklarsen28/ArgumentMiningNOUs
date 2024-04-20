@@ -7,10 +7,9 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 import sys
-sys.path.append('..')
+# sys.path.append('..')
 
-from data_processing.text_formatting import cleanup_whitespaces
-from util.helpers import id2label
+from src.util.helpers import id2label
 
 
 class LDA:
@@ -112,19 +111,8 @@ class LDA:
         predictions = []
         for i, bow in enumerate(self.corpus):
             topic_distribution = model.get_document_topics(bow)
-
             sorted_topics = sorted(topic_distribution, key=lambda x: x[1], reverse=True)
-            top_topic, top_prob = sorted_topics[0]  # Top topic and its probability
-
-            prediction = {'topic': top_topic, 'confidence': round(top_prob, 2)}
-            predictions.append(prediction)
-
-            if relevancy:
-                top_topic_words = model.show_topic(top_topic, topn=1000)
-                top_words = [word for word, prob in top_topic_words]
-                preprocessed_words_set = set(self.preprocessed_data[i])
-                relevant_words = [word for word in top_words if word in preprocessed_words_set]
-                prediction['relevant_words'] = relevant_words
+            predictions.append(sorted_topics)
 
         return predictions
 
@@ -152,7 +140,8 @@ class LDA:
 
         return coherence_values, model_list, topic_range, passes
 
-    def extract_arguments(self, dataframe, model):
+    def extract_arguments(self, dataframe, model, threshold):
+        print(threshold)
         mined_arguments = []
 
         for _, row in tqdm(dataframe.iterrows(), desc="Processing Documents", total=len(dataframe)):
@@ -162,22 +151,27 @@ class LDA:
 
             doc = self.nlp(document)
             sentences = [sentence.text for sentence in doc.sents]
+            predicted_topics = self.predict_topics(model)
 
-            sentence_topics = self.predict_topics(model)
+            # Predict and Filter by threshold
+            sentence_topics = [set([topic[0] for topic in sentence_predictions if topic[1] >= threshold])
+                               for sentence_predictions in predicted_topics]
 
             # Find sequences of sentences with the same topic longer than two
-            current_topic = None
+            prev_topics = sentence_topics[0]
             topic_sequence = []
-            for sentence, prediction in zip(sentences, sentence_topics):
-                if prediction['topic'] == current_topic:
+            for sentence, curr_topics in zip(sentences, sentence_topics):
+                union = prev_topics.intersection(curr_topics)
+
+                if union:
                     topic_sequence.append(sentence)
-                else:
+                else:  # If end of sequence
                     if len(topic_sequence) > 2:
                         arguments_text = ' '.join(topic_sequence)
                         row = {'actor': actor, 'text': arguments_text, 'label': label}
                         mined_arguments.append(row)
 
-                    current_topic = prediction['topic']
+                    prev_topics = curr_topics
                     topic_sequence = [sentence]
 
             # Catch the last sequence in the document
@@ -221,7 +215,7 @@ def plot_topic_distribution(dataframe, savefig=None):
         savefig (str, optional): Filename to save the plot. If None, the plot is not saved.
     """
     dataframe['label'] = dataframe['label'].apply(id2label)
-    dataframe['topic'] = dataframe['topic_predictions'].apply(lambda x: x['topic'])
+    dataframe['topic'] = dataframe['topic_predictions'].apply(lambda x: x[0][0])
     grouped = dataframe.groupby(['topic', 'label']).size().unstack(fill_value=0)
 
     class_totals = grouped.sum()  # Frequency of each class

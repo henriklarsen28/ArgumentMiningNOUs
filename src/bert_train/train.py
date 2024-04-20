@@ -1,4 +1,16 @@
-from finetuning import train_and_save_classifiers
+from finetuning import train_and_save_classifiers, load_and_evaluate
+
+
+def raw_train():
+    print('Train Raw')
+    path = "../../dataset/nou_hearings.csv"
+    train_and_save_classifiers('Raw-Classifier', num_epochs=6, csv_path=path)
+
+
+def raw_eval():
+    print('Evaluate Raw')
+    path = "../../dataset/nou_hearings.csv"
+    load_and_evaluate('../../classifiers/Raw-Classifier-best', csv_path=path)
 
 
 def lda_train():
@@ -13,4 +25,15 @@ def icl_train():
     train_and_save_classifiers('ICL-Classifier', num_epochs=6, csv_path=path)
 
 
-icl_train()
+def icl_eval():
+    print('Evaluate ICL')
+    path = '../../dataset/cleaned_arguments_in_context_learning.csv'
+    load_and_evaluate('../../classifiers/ICL-Classifier-Best', csv_path=path)
+
+
+def sentiment_train():
+    path = '../../dataset/norec.csv'
+    train_and_save_classifiers('Sentiment-Classifier', num_epochs=3, csv_path=path, regression=True)
+
+
+lda_train()

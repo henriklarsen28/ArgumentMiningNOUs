@@ -5,34 +5,45 @@ import numpy as np
 import torch
 import wandb
 from datasets import Dataset, DatasetDict
+from sklearn.metrics import mean_squared_error
 from transformers import (
     AutoModelForSequenceClassification,
     AutoTokenizer,
     Trainer,
     TrainingArguments, pipeline,
 )
-from src.util.helpers import load_dataset_from_csv
+from src.util.helpers import load_dataset_from_csv, configure_for_regression
 
 
 class FineTuner:
     def __init__(self, model_name: str, csv_path: str, output_folder: str, output_name: str,
                  num_epochs: int = 5,
                  max_tokenized_length: int = 512,
-                 metric_names: tuple = tuple('accuracy'),
                  wand_logging: bool = True,
-                 eval_steps: int = 50):
+                 eval_steps: int = 50,
+                 regression=False):
         # Run time constants
         self.max_tokenized_length = max_tokenized_length
         self.num_epochs = num_epochs
         self.seed = 42
-        self.metric_names = metric_names
         self.wandb_logging = wand_logging
         self.eval_steps = eval_steps
         self.output_folder = output_folder
         self.output_name = output_name
+        self.regression = regression
 
         # Load dataset
         self.dataset, num_labels = load_dataset_from_csv(csv_path)
+
+        # Adjust for regression
+        if not regression:
+            self.metric_names = ('accuracy', 'recall', 'precision', 'f1')
+        else:
+            num_labels = 1
+            self.dataset['train'] = configure_for_regression(self.dataset['train'])
+            self.dataset['test'] = configure_for_regression(self.dataset['test'])
+            print(self.dataset['train'][0])
+            self.metric_names = ('mean_squared_error',)
 
         # Initialize tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -65,6 +76,9 @@ class FineTuner:
             if metric == 'accuracy':
                 metrics[metric] = evaluate.load(metric).compute(
                     predictions=predictions, references=labels)[metric]
+            elif self.regression:
+                mse = mean_squared_error(labels, predictions)
+                metrics['mse'] = mse
             else:
                 metrics[metric] = evaluate.load(metric).compute(
                     predictions=predictions, references=labels, average='macro')[metric]

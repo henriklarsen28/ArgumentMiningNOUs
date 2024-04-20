@@ -3,6 +3,8 @@ import json
 import pandas as pd
 import torch
 from datasets import Dataset
+from datasets import DatasetDict, ClassLabel, Value
+
 
 def id2label(idx):
     # Read json file
@@ -18,6 +20,11 @@ def labels():
         # Convert json file to dictionary
         dicti = json.loads(f.read())
         return dicti.keys()
+
+
+def configure_for_regression(dataset):
+    dataset = dataset.cast_column('label', Value('float32'))
+    return dataset
 
 
 def select_device():
