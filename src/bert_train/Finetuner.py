@@ -40,6 +40,7 @@ class FineTuner:
             self.metric_names = ('accuracy', 'recall', 'precision', 'f1')
         else:
             num_labels = 1
+            self.metric_names = ('mse',)
             self.dataset['train'] = configure_for_regression(self.dataset['train'])
             self.dataset['test'] = configure_for_regression(self.dataset['test'])
 
