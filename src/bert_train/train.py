@@ -38,7 +38,7 @@ def icl_eval():
 
 
 def sentiment_train():
-    path = '../../dataset/norec.csv'
+    path = '../../dataset/sentiment_data.csv'
     train_and_save_classifiers('Sentiment-Classifier', num_epochs=3, csv_path=path, regression=True)
 
 

@@ -19,6 +19,6 @@ def produce_test_result_matrix(dataset_name, classifier_name, output_name):
     dataset, _ = load_dataset_from_csv(csv_path=f"../../dataset/{dataset_name}")
     test_df = dataset['test'].to_pandas()
 
-    pred_df = predict_dataset(model=f"../../classifiers/{classifier_name}", test_df=test_df)
+    pred_df = predict_dataset(model=f"{classifier_name}", test_df=test_df)
     pred_df.to_csv(f"../../inference_results/{output_name}")
     return pd.read_csv(f"../../inference_results/{output_name}")
